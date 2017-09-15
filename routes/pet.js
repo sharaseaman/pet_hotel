@@ -22,5 +22,29 @@ router.get('/', function(req, res) {
         }
     })
 });
-
+router.post('/', function(req, res) {
+    var newPetObj = req.body;
+    console.log('baaaaallin');
+    console.log(newPetObj);
+    // res.sendStatus(202);
+    pool.connect(function(connectionError, client, done) {
+        if(connectionError) {
+            console.log(connectionError);
+            res.sendStatus(500);
+        } else {
+            var pQuery = 'INSERT INTO pet_hotel (name, breed, color, checkedIn) VALUES ($1, $2, $3, $4)';
+            var valueArray = [ newPetObj.name, newPetObj.breed, newPetObj.color, newPetObj.checkedin ];
+            client.query(pQuery, valueArray, function(queryError, resultObj) {
+                done();
+                if(queryError) {
+                    console.log(queryError);
+                    res.sendStatus(500);
+                } else {
+                    console.log('yaaaaaay');
+                    res.sendStatus(202);
+                }
+            });
+        }
+    })
+})
 module.exports = router;

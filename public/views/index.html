@@ -10,6 +10,31 @@
 </head>
 <body>
     <h1>Pet Hotel</h1>
+    <div id="addPets">
+        <input type="text" id="name" placeholder="Pet's Name">
+        <input type="text" id="breed" placeholder="Breed">
+        <input type="text" id="color" placeholder="Color">
+        <select name="checkedIn" id="checkedIn">
+            <option value=true>Check In</option>
+            <option value=false>Check Out</option>
+        </select>
+        <button id="addPet">Book 'em</button>
+    </div>
+    <h2>Inmates</h2>
+    <div id="inmates">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Breed</th>
+                    <th>Color</th>
+                    <th>Checked In?</th>
+                </tr>
+            </thead>
+            <tbody id="petTable">
+            </tbody>
+        </table>
+    </div>
     
 </body>
 </html>

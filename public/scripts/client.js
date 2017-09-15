@@ -2,8 +2,8 @@ $(document).ready(onReady);
 
 function onReady(){
     console.log('js');
+$('#addPet').on('click', bookEm);
 
-    
 }
 
 function getPetHotel(){
@@ -14,4 +14,8 @@ function getPetHotel(){
             console.log('gotten', res);
         }
     })
+}
+
+function bookEm() {
+    console.log('I am clicked.')
 }

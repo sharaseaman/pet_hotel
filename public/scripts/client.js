@@ -18,4 +18,6 @@ function getPetHotel(){
 
 function bookEm() {
     console.log('I am clicked.')
+
+    
 }

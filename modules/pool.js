@@ -3,7 +3,7 @@ var Pool = require('pg').Pool;
 var config = {
     host: 'localhost',
     port: 5432,
-    database: 'pet_hotel',
+    database: 'petHotel',
     max: 20
 }
 

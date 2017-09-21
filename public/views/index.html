@@ -20,9 +20,7 @@
             <option value=false>Check Out</option>
         </select>
         <button id="addPet" ng-click="WC.addPet()">Book 'em</button>
-        <div ng-repeat="pet in WC.pets">
         <h2>{{pet.name}}</h2>
-        </div>
     </div>
     <h2>Inmates</h2>
     <div id="inmates">
@@ -36,6 +34,13 @@
                 </tr>
             </thead>
             <tbody id="petTable">
+                <tr ng-repeat="pet in WC.pets">
+                    <td>{{pet.name}}</td>
+                    <td>{{pet.breed}}</td>
+                    <td>{{pet.color}}</td>
+                    <td>{{pet.checkedin}}</td>
+                    <td><button ng-click="WC.deletePet()" data-id="{{pet.id}}">Delete</button></td>
+                </tr>
             </tbody>
         </table>
     </div>

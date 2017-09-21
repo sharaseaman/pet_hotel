@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="vendors/jquery.js"></script>
+    <script src="vendors/angular.min.js"></script>
     <script src="scripts/client.js"></script>
     <title>Pet Hotel</title>
 </head>
-<body>
+<body ng-app="myApp">
     <h1>Pet Hotel</h1>
-    <div id="addPets">
-        <input type="text" id="name" placeholder="Pet's Name">
-        <input type="text" id="breed" placeholder="Breed">
-        <input type="text" id="color" placeholder="Color">
-        <select name="checkedIn" id="checkedIn">
+    <section id="addPets" ng-controller="WardenController as WC" ng-init="WC.getPets()">
+    <div>
+        <input type="text" id="name" placeholder="Pet's Name" ng-model="WC.nameIn">
+        <input type="text" id="breed" placeholder="Breed" ng-model="WC.breedIn">
+        <input type="text" id="color" placeholder="Color"ng-model="WC.colorIn">
+        <select name="checkedIn" id="checkedIn" ng-model="WC.checkedIn">
             <option value=true>Check In</option>
             <option value=false>Check Out</option>
         </select>
-        <button id="addPet">Book 'em</button>
+        <button id="addPet" ng-click="WC.addPet()">Book 'em</button>
+        <div ng-repeat="pet in WC.pets">
+        <h2>{{pet.name}}</h2>
+        </div>
     </div>
     <h2>Inmates</h2>
     <div id="inmates">
@@ -35,6 +39,6 @@
             </tbody>
         </table>
     </div>
-    
+</section>  
 </body>
 </html>

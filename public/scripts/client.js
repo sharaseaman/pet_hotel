@@ -1,49 +1,34 @@
-$(document).ready(onReady);
+console.log('In js');
 
-function onReady(){
-    console.log('js');
+var myApp = angular.module('myApp', []);
 
-$('#addPet').on('click', bookEm);
-getPetHotel();
-}
+myApp.controller('WardenController', function ($http) {
+    console.log('WController');
 
-function getPetHotel(){
-    $.ajax({
-        type: 'GET',
-        url: '/pet',
-        success: function(res){
-            console.log('gotten', res);
-            $('#petTable').empty();
-            for (var i =0; i < res.length; i++) {
-                console.log('in for loop');
-                var $trow = $('<tr>');
-                $trow.append('<td>' + res[i].name + '</td>');
-                $trow.append('<td>' + res[i].breed + '</td>');
-                $trow.append('<td>' + res[i].color + '</td>');
-                $trow.append('<td>' + res[i].checkedin + '</td>');
-                $('#petTable').append($trow);
-            } //end for loop
-        } //end success
-    }) //end success
-} //end getPetHotel
+    // VM
+    var vm = this;
 
-function bookEm(  ) {
-    console.log('I am clicked.')
-    var petToBook = {
-        name: $('#name').val(),
-        breed: $('#breed').val(),
-        color: $('#color').val(),
-        checkedin: $('#checkedIn').val()
-    }
-    console.log(petToBook);
-        $.ajax({
-            type: 'POST',
+    vm.getPets = function () {
+        console.log('In getPets');
+        $http({
+            method: 'GET',
             url: '/pet',
-            data: petToBook,
-            success: function(res){
-                console.log('woof');
-                getPetHotel();
-            }
-        })
-    
-}
+        }).then(function (response) {
+            console.log('Response:', response);
+            vm.pets = response.data;    
+        }); //end then
+    }//end getPets function
+
+    vm.addPet = function () {
+        console.log('In postPets');
+        
+        $http({
+            method: 'POST',
+            url: '/pet',
+            data: {name: vm.nameIn, breed: vm.breedIn}
+            }).then(function(response){
+                vm.getPets(); 
+                console.log('response', response);
+        }) //and then done
+    }; //end addPet function
+}); //end controller function

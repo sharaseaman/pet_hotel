@@ -9,7 +9,7 @@ router.get('/', function(req, res) {
             console.log(connectionError);
             res.sendStatus(500);
         } else {
-            client.query('SELECT * FROM pet_hotel', function(queryError, resultObj){
+            client.query('SELECT * FROM pets', function(queryError, resultObj){
                 done();
                 if(queryError) {
                     console.log(queryError);
@@ -32,8 +32,8 @@ router.post('/', function(req, res) {
             console.log(connectionError);
             res.sendStatus(500);
         } else {
-            var pQuery = 'INSERT INTO pet_hotel (name, breed, color, checkedIn) VALUES ($1, $2, $3, $4)';
-            var valueArray = [ newPetObj.name, newPetObj.breed, newPetObj.color, newPetObj.checkedin ];
+            var pQuery = 'INSERT INTO pets (name, breed, color) VALUES ($1, $2, $3)';
+            var valueArray = [ newPetObj.name, newPetObj.breed, newPetObj.color ];
             client.query(pQuery, valueArray, function(queryError, resultObj) {
                 done();
                 if(queryError) {
@@ -48,32 +48,32 @@ router.post('/', function(req, res) {
     })
 });
 
-router.put('/:id', function (req, res) {
-    pool.connect(function (connectionError, client, done) {
-        console.log('req.body ->', req.params.id);
-        var dpId = req.params.id;
+// router.put('/:id', function (req, res) {
+//     pool.connect(function (connectionError, client, done) {
+//         console.log('req.body ->', req.params.id);
+//         var dpId = req.params.id;
 
-        if (connectionError) {
-            console.log(connectionError);
-            res.sendStatus(500);
-        } else {
-            var pQuery = 'UPDATE pet_hotel SET checkedin= NOT checkedin WHERE id=$1';
-            var valueArray = [dpId];
-            client.query(pQuery, valueArray, function (queryError, resultObj) {
-                done();
-                if (queryError) {
-                    console.log(queryError);
-                    res.sendStatus(500);
-                } else {
-                    console.log('yaaaaaay');
-                    res.sendStatus(202);
-                }
-            });
-        }
-    })
+//         if (connectionError) {
+//             console.log(connectionError);
+//             res.sendStatus(500);
+//         } else {
+//             var pQuery = 'UPDATE pets SET checkedin= NOT checkedin WHERE id=$1';
+//             var valueArray = [dpId];
+//             client.query(pQuery, valueArray, function (queryError, resultObj) {
+//                 done();
+//                 if (queryError) {
+//                     console.log(queryError);
+//                     res.sendStatus(500);
+//                 } else {
+//                     console.log('yaaaaaay');
+//                     res.sendStatus(202);
+//                 }
+//             });
+//         }
+//     })
 
 
-});//end delete route
+// });//end put route
 
 router.delete('/:id',function(req,res){
     pool.connect(function (connectionError, client, done) {
@@ -84,7 +84,7 @@ router.delete('/:id',function(req,res){
             console.log(connectionError);
             res.sendStatus(500);
         } else {
-            var pQuery = 'DELETE from pet_hotel WHERE id=$1';
+            var pQuery = 'DELETE from pets WHERE id=$1';
             var valueArray = [dpId];
             client.query(pQuery, valueArray, function (queryError, resultObj) {
                 done();
@@ -101,4 +101,6 @@ router.delete('/:id',function(req,res){
 
 
 });//end delete route
+
+
 module.exports = router;

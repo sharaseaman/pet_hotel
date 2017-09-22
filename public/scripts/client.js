@@ -59,4 +59,12 @@ myApp.controller('WardenController', function ($http) {
     }
 }); 
 
-//end controller function
+//end warden controller function
+
+
+myApp.controller('RecordsController', function () {
+    console.log('RController');
+
+    // VM
+    var vm = this;
+});

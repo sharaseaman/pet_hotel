@@ -46,5 +46,32 @@ router.post('/', function(req, res) {
             });
         }
     })
-})
+});
+
+router.delete('/:id',function(req,res){
+    pool.connect(function (connectionError, client, done) {
+        console.log('req.body ->', req.params.id);
+        var dpId = req.params.id;
+
+        if (connectionError) {
+            console.log(connectionError);
+            res.sendStatus(500);
+        } else {
+            var pQuery = 'DELETE from pet_hotel WHERE id=$1';
+            var valueArray = [dpId];
+            client.query(pQuery, valueArray, function (queryError, resultObj) {
+                done();
+                if (queryError) {
+                    console.log(queryError);
+                    res.sendStatus(500);
+                } else {
+                    console.log('yaaaaaay');
+                    res.sendStatus(202);
+                }
+            });
+        }
+    })
+
+
+});//end delete route
 module.exports = router;

@@ -9,7 +9,7 @@
     <title>Pet Hotel</title>
 </head>
 <body ng-app="myApp">
-    <h1>Pet Hotel</h1>
+    <h1>Pet Prison</h1>
     <section id="addPets" ng-controller="WardenController as WC" ng-init="WC.getPets()">
     <div>
         <input type="text" id="name" placeholder="Pet's Name" ng-model="WC.nameIn">
@@ -39,7 +39,7 @@
                     <td>{{pet.breed}}</td>
                     <td>{{pet.color}}</td>
                     <td>{{pet.checkedin}}</td>
-                    <td><button ng-click="WC.deletePet()" data-id="{{pet.id}}">Delete</button></td>
+                    <td><button ng-click="WC.deletePet(pet.id)">Delete</button></td>
                 </tr>
             </tbody>
         </table>
@@ -47,3 +47,5 @@
 </section>  
 </body>
 </html>
+
+<!-- data-id="{{pet.id}}" ng-model="WC.idthing" -->

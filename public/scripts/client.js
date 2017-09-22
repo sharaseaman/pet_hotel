@@ -32,14 +32,16 @@ myApp.controller('WardenController', function ($http) {
         }) //and then done
     }; //end addPet function
 
-    vm.deletePet = function() {
-        var theThing = vm.pet.id;
-        console.log('In deletePet with vm ->', theThing);
+    vm.deletePet = function(item) {
+        
+        console.log('In deletePet with item ->', item);
 
-        // $http({
-        //     method: 'DELETE',
-        //     url: '/pet',
-        //     data: 
-        // })
+        $http({
+            method: 'DELETE',
+            url: '/pet/' + item
+        }).then(function (response){
+            console.log('in deletePet trying to get button');
+            vm.getPets();
+        });
     }
 }); //end controller function

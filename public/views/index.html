@@ -47,9 +47,9 @@
 </section> 
 <section id="visits" ng-controller="RecordsController as RC">
     <h2>Booking</h2>
-    <div id="booking">
+    <div id="booking" ng-init="RC.getnames()" > 
         <select>
-            <option>test</option>
+            <option ng-repeat="petname in RC.name">{{petname.name}}</option>
         </select>
         Check-in Date: <input type="date" id="checkIn">
         Check-out Date:<input type="date" id="checkOut">
@@ -67,10 +67,10 @@
                 </tr>
             </thead>
             <tbody id="visitTable">
-                <tr ng-repeat="pet in RC.views">
-                    <td>{{pet.name}}</td>
-                    <td>{{pet.checkin}}</td>
-                    <td>{{pet.checkout}}</td>
+                <tr ng-repeat="visits in RC.views">
+                    <td>{{visits.name}}</td>
+                    <td>{{visits.checkin}}</td>
+                    <td>{{visits.checkout}}</td>
                 </tr>
             </tbody>
         </table>

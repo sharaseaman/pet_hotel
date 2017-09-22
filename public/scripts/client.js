@@ -62,9 +62,33 @@ myApp.controller('WardenController', function ($http) {
 //end warden controller function
 
 
-myApp.controller('RecordsController', function () {
+myApp.controller('RecordsController', function ($http) {
     console.log('RController');
 
     // VM
     var vm = this;
+    vm.getnames = function(){
+
+        console.log('In getnames');
+        $http({
+            method: 'GET',
+            url: '/records',
+        }).then(function (response) {
+            console.log('Response:', response);
+            vm.name = response.data;
+        }); //end then
+    }
+
+    vm.bookPet = function () {
+        console.log('In bookpostPets');
+
+        $http({
+            method: 'POST',
+            url: '/records',
+            data: { name: vm.nameIn, breed: vm.breedIn, color: vm.colorIn, checked: vm.checkedIn }
+        }).then(function (response) {
+            vm.getPets();
+            console.log('response', response);
+        }) //and then done
+     }; //end addPet function
 });

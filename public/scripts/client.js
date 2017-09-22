@@ -44,4 +44,19 @@ myApp.controller('WardenController', function ($http) {
             vm.getPets();
         });
     }
-}); //end controller function
+    
+    vm.putPet =function(item){
+    //      console.log('put pet function');
+    //console.log('In deletePet with item ->', item);
+
+        $http({
+            method: 'PUT',
+            url: '/pet/' + item
+        }).then(function (response) {
+            console.log('in putPET not PUSH trying to get button');
+            vm.getPets();
+        });
+    }
+}); 
+
+//end controller function

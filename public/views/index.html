@@ -38,7 +38,7 @@
                     <td>{{pet.name}}</td>
                     <td>{{pet.breed}}</td>
                     <td>{{pet.color}}</td>
-                    <td>{{pet.checkedin}}</td>
+                    <td><input type="checkbox" ng-click="WC.putPet(pet.id)" ng-checked="{{pet.checkedin}}"></td>
                     <td><button ng-click="WC.deletePet(pet.id)">Delete</button></td>
                 </tr>
             </tbody>

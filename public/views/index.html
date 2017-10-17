@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="vendors/jquery.js"></script>
+    <script src="vendors/angular.min.js"></script>
     <script src="scripts/client.js"></script>
     <title>Pet Hotel</title>
 </head>
-<body>
-    <h1>Pet Hotel</h1>
-    <div id="addPets">
-        <input type="text" id="name" placeholder="Pet's Name">
-        <input type="text" id="breed" placeholder="Breed">
-        <input type="text" id="color" placeholder="Color">
-        <select name="checkedIn" id="checkedIn">
+<body ng-app="myApp">
+    <h1>Pet Prison</h1>
+    <section id="addPets" ng-controller="WardenController as WC" ng-init="WC.getPets()">
+    <div>
+        <input type="text" id="name" placeholder="Pet's Name" ng-model="WC.nameIn">
+        <input type="text" id="breed" placeholder="Breed" ng-model="WC.breedIn">
+        <input type="text" id="color" placeholder="Color"ng-model="WC.colorIn">
+        <!-- <select name="checkedIn" id="checkedIn" ng-model="WC.checkedIn">
             <option value=true>Check In</option>
             <option value=false>Check Out</option>
-        </select>
-        <button id="addPet">Book 'em</button>
+        </select> -->
+        <button id="addPet" ng-click="WC.addPet()">Guilty</button>
+        <h2>{{pet.name}}</h2>
     </div>
     <h2>Inmates</h2>
     <div id="inmates">
@@ -28,13 +30,53 @@
                     <th>Name</th>
                     <th>Breed</th>
                     <th>Color</th>
-                    <th>Checked In?</th>
+                    <!-- <th>Checked In?</th> -->
                 </tr>
             </thead>
             <tbody id="petTable">
+                <tr ng-repeat="pet in WC.pets">
+                    <td>{{pet.name}}</td>
+                    <td>{{pet.breed}}</td>
+                    <td>{{pet.color}}</td>
+                    <!--<td><input type="checkbox" ng-click="WC.putPet(pet.id)" ng-checked="{{pet.checkedin}}"></td>-->
+                    <td><button ng-click="WC.deletePet(pet.id)">Exonerated</button></td>
+                </tr>
             </tbody>
         </table>
     </div>
+</section> 
+<section id="visits" ng-controller="RecordsController as RC">
+    <h2>Booking</h2>
+    <div id="booking" ng-init="RC.getnames()" > 
+        <select>
+            <option ng-repeat="petname in RC.name">{{petname.name}}</option>
+        </select>
+        Check-in Date: <input type="date" id="checkIn">
+        Check-out Date:<input type="date" id="checkOut">
+        <button ng-click="RC.bookPet()">Book 'em!</button>
+    </div>
     
+    <div id="records">
+        <h2>Records</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Checked-in</th>
+                    <th>Checked-out</th>
+                </tr>
+            </thead>
+            <tbody id="visitTable">
+                <tr ng-repeat="visits in RC.views">
+                    <td>{{visits.name}}</td>
+                    <td>{{visits.checkin}}</td>
+                    <td>{{visits.checkout}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</section>
 </body>
 </html>
+
